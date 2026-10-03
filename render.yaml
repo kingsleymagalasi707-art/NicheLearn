@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: nichelearn
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true

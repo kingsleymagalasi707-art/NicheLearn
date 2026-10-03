@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NicheLearn — search the web by niche and turn discoveries into structured learning playlists.">
+  <title>NicheLearn — Learn any niche from the web</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">N</span><span>NicheLearn</span></a>
+    <nav>
+      <a href="#explore">Explore</a>
+      <a href="#playlists">Playlists</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="account-bar" id="accountBar"><span class="account-name" id="accountName"></span><button class="ghost-btn" id="logoutBtn">Sign out</button></div>
+    <button class="ghost-btn" id="loginBtn">Sign in</button>
+    <button class="primary-btn top-subscribe" id="joinBtn">Join</button>
+  </header>
+
+  <main>
+    <section class="hero" id="explore">
+      <div class="eyebrow">SEARCH • DISCOVER • LEARN</div>
+      <h1>Turn the internet into<br><span>your learning library.</span></h1>
+      <p class="hero-copy">Search videos, audio, articles, documents and websites — while keeping every result focused on the niche you choose.</p>
+
+      <div class="search-shell">
+        <div class="search-row">
+          <input id="searchInput" autocomplete="off" placeholder="Try: how to start affiliate marketing">
+          <select id="typeSelect" aria-label="Content type">
+            <option value="all">All content</option>
+            <option value="video">Videos</option>
+            <option value="audio">Audio</option>
+            <option value="document">Documents</option>
+            <option value="article">Articles</option>
+            <option value="website">Websites</option>
+          </select>
+          <select id="nicheSelect" aria-label="Niche">
+            <option value="all">All niches</option>
+            <option value="money">Make Money Online</option>
+            <option value="affiliate">Affiliate Marketing</option>
+            <option value="ecommerce">E-commerce</option>
+            <option value="trading">Trading Education</option>
+            <option value="coding">Coding & AI</option>
+            <option value="marketing">Digital Marketing</option>
+            <option value="creator">Content Creation</option>
+            <option value="business">Business</option>
+          </select>
+          <select id="subnicheSelect" aria-label="Sub-niche" disabled>
+            <option value="">All topics in niche</option>
+          </select>
+          <select id="sourceSelect" aria-label="Search source">
+            <option value="all">All sources</option>
+            <option value="youtube">YouTube</option>
+            <option value="web">Web</option>
+            <option value="googlebooks">Google Books</option>
+            <option value="archive">Internet Archive</option>
+            <option value="listennotes">Listen Notes</option>
+            <option value="openalex">OpenAlex</option>
+            <option value="crossref">Crossref</option>
+            <option value="wikipedia">Wikipedia</option>
+            <option value="openlibrary">Open Library</option>
+          </select>
+          <button class="search-btn" id="searchBtn">Search</button>
+        </div>
+
+        <div class="quick-filters">
+          <span class="filter-label">FILTER</span>
+          <button class="chip active" data-length="any">Any length</button>
+          <button class="chip" data-length="short">Short</button>
+          <button class="chip" data-length="medium">Normal</button>
+          <button class="chip" data-length="long">Long / Deep dive</button>
+          <button class="chip" data-length="guide">PDF / Guide</button>
+          <span class="filter-spacer"></span>
+          <label class="switch"><input type="checkbox" id="freeOnly"><span></span> Free access</label>
+        </div>
+      </div>
+
+      <div class="focus-row">
+        <span class="focus-label">FOCUS</span>
+        <span id="focusText">Choose a niche and optional sub-niche to make results more specific.</span>
+      </div>
+
+      <div class="templates">
+        <span>Search templates</span>
+        <button data-template="What is ">What is…</button>
+        <button data-template="How to ">How to…</button>
+        <button data-template="How does ">How does…</button>
+        <button data-template="How are people ">How are people…</button>
+        <button data-template="Best way to ">Best way to…</button>
+        <button data-template="Step by step ">Step by step…</button>
+        <button data-template="Case study ">Case study…</button>
+        <button data-template="Beginner guide to ">Beginner guide…</button>
+      </div>
+    </section>
+
+    <section class="learning-controls">
+      <div>
+        <p class="section-kicker">YOUR SEARCH MODE</p>
+        <h2>Choose how you want to learn.</h2>
+      </div>
+      <div class="mode-grid">
+        <button class="mode-card active" data-mode="learn">
+          <span class="mode-icon">◈</span><strong>Learn it</strong><small>Explanations, guides & lessons</small>
+        </button>
+        <button class="mode-card" data-mode="do">
+          <span class="mode-icon">↗</span><strong>Do it</strong><small>Step-by-step tutorials & workflows</small>
+        </button>
+        <button class="mode-card" data-mode="people">
+          <span class="mode-icon">◎</span><strong>See people doing it</strong><small>Case studies & real examples</small>
+        </button>
+        <button class="mode-card" data-mode="get">
+          <span class="mode-icon">↓</span><strong>Get it</strong><small>Tools, resources & access routes</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <div class="results-head">
+        <div><p class="section-kicker">DISCOVERY</p><h2 id="resultsTitle">Explore your niche</h2></div>
+        <div class="result-count" id="resultCount">Search connected sources</div>
+      </div>
+      <div class="results-layout">
+        <div class="results" id="results"></div>
+        <aside class="side-panel">
+          <div class="panel">
+            <div class="panel-title"><span>✦</span> Learning path</div>
+            <p>Save useful results and arrange them in order. Your playlist becomes a course-like path.</p>
+            <button class="primary-btn" id="playlistBtn">Open playlist</button>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Niche focus</div>
+            <div id="nicheSummary" class="niche-summary">Choose a niche to narrow discovery.</div>
+          </div>
+          <div class="panel muted-panel">
+            <div class="panel-title">Access-aware</div>
+            <p>When a result is paid, private, or unavailable, NicheLearn should show the legitimate access route instead of pretending the content is free.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="playlist-section" id="playlists">
+      <div class="playlist-head">
+        <div><p class="section-kicker">MY PLAYLIST</p><h2>Build a course from the web.</h2><p>Drag-free ordering: add resources, then move lessons up or down.</p></div>
+        <button class="ghost-btn" id="clearPlaylist">Clear</button>
+      </div>
+      <div id="playlist" class="playlist"></div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="pricing-copy"><p class="section-kicker">SIMPLE PRICING</p><h2>7 days free.<br>Then choose your plan.</h2><p class="pricing-sub">Every new Pro subscription starts with a 7-day $0 trial. There is no permanent free plan. Choose monthly or yearly billing before the paid period begins.</p></div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <span class="featured-label">FREE TRIAL</span><div class="plan-badge">7 DAYS</div><div class="price">$0<span>/trial</span></div><p class="price-note">Full Pro access for 7 days.</p>
+          <ul><li>Full Pro search allowance</li><li>Advanced niche and learning-mode filters</li><li>Cloud-synced playlists</li><li>Saved learning paths</li><li>Access-aware resources</li></ul>
+          <button class="secondary-plan" id="trialInfoBtn">7-day trial included</button>
+          <small>No charge during the 7-day trial. A paid plan is required to continue after the trial.</small>
+        </div>
+        <div class="price-card featured">
+          <div class="plan-badge">PRO MONTHLY</div><div class="price">$14<span>/month</span></div><p class="price-note">7 days free, then $14/month.</p>
+          <ul><li>100 searches per day</li><li>Advanced niche and learning-mode filters</li><li>Cloud-synced playlists</li><li>Saved searches and learning paths</li><li>Access-aware resource organization</li><li>Priority access to new workspace features</li></ul>
+          <button class="paypal-btn" id="subscribeMonthlyBtn">Start Monthly with PayPal</button>
+          <small>7-day $0 trial, then $14 USD every month until canceled.</small>
+        </div>
+        <div class="price-card">
+          <span class="featured-label">SAVE WITH YEARLY</span><div class="plan-badge">PRO YEARLY</div><div class="price">$140<span>/year</span></div><p class="price-note">7 days free, then $140/year.</p>
+          <ul><li>Everything in Pro</li><li>100 searches per day</li><li>Annual billing</li><li>Cloud-synced playlists</li><li>Saved learning paths</li><li>Priority access to new workspace features</li></ul>
+          <button class="paypal-btn" id="subscribeYearlyBtn">Start Yearly with PayPal</button>
+          <small>7-day $0 trial, then $140 USD every year until canceled.</small>
+        </div>
+      </div>
+      <div class="account-billing" id="accountBilling">
+        <div><p class="section-kicker">YOUR MEMBERSHIP</p><h3 id="membershipTitle">Not subscribed</h3><p id="membershipText">Sign in to see your trial and billing status.</p></div>
+        <div class="membership-actions"><span id="membershipBadge" class="membership-badge">—</span><button class="ghost-btn" id="refreshMembershipBtn">Refresh</button></div>
+      </div>
+      <div class="billing-note">Prices are shown in USD. Taxes or payment-provider charges, if applicable, are handled separately by the billing provider.</div>
+    </section>
+  
+    <div class="modal-backdrop" id="authModal">
+      <div class="auth-modal">
+        <button class="modal-close" id="closeAuth">×</button>
+        <div class="section-kicker">NICHELEARN ACCOUNT</div>
+        <h2 id="authTitle">Sign in</h2>
+        <p id="authHint">Save playlists and searches across devices.</p>
+        <div id="nameField" class="hidden"><input id="authName" placeholder="Your name"></div>
+        <input id="authEmail" type="email" placeholder="Email address">
+        <input id="authPassword" type="password" placeholder="Password">
+        <button class="primary-btn auth-submit" id="authSubmit">Sign in</button>
+        <button class="auth-toggle" id="authToggle">Create an account instead</button>
+        <div id="authMessage"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer><span>© 2026 NicheLearn</span><span>Built to help people learn from the open web.</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
